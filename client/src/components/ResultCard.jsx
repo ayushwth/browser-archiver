@@ -98,7 +98,7 @@ export default function ResultCard({ result, onDelete }) {
             onClick={() => onDelete(result.id)}
             title="Delete"
           >
-            🗑
+            Delete
           </button>
         )}
       </div>
