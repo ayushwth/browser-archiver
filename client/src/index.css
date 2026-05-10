@@ -1056,7 +1056,7 @@ img {
 .chart-tooltip-label { color: var(--color-text-secondary); margin-bottom: 2px; }
 .chart-tooltip-value { font-weight: var(--font-weight-semibold); }
 
-/* Kill recharts focus outlines */
+/* Kill recharts focus outlines & cursor highlights */
 .recharts-wrapper *:focus,
 .recharts-wrapper *:active,
 .recharts-surface:focus,
@@ -1064,6 +1064,12 @@ img {
 .recharts-rectangle:focus,
 .recharts-sector:focus,
 .recharts-dot:focus { outline: none !important; stroke: none !important; }
+.recharts-tooltip-cursor { fill: rgba(255,255,255,0.04) !important; stroke: none !important; rx: 6; ry: 6; }
+.recharts-active-shape { outline: none !important; }
+.recharts-bar-rectangle:focus,
+.recharts-bar-rectangle:active { outline: none !important; }
+.recharts-wrapper { outline: none !important; cursor: default; }
+.recharts-wrapper svg { outline: none !important; }
 
 /* ========================================
    Filter Panel

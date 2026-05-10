@@ -11,6 +11,19 @@ import {
 
 const PIE_COLORS = ['#4ade80', '#fbbf24', '#f87171'];
 
+const SvgIcon = ({ children }) => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#8e8e96' }}>
+    {children}
+  </svg>
+);
+
+const icons = {
+  archive: <SvgIcon><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></SvgIcon>,
+  check: <SvgIcon><polyline points="20 6 9 17 4 12"/></SvgIcon>,
+  clock: <SvgIcon><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></SvgIcon>,
+  storage: <SvgIcon><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></SvgIcon>,
+};
+
 function StatCard({ label, value, icon, delay = 0, trend }) {
   const animated = useAnimatedCounter(value, 1200, delay);
   return (
@@ -139,11 +152,11 @@ export default function DashboardPage() {
 
       {/* Stat cards */}
       <div className="stat-cards-grid">
-        <StatCard label="Total Archives" value={stats.total || 0} icon="📄" delay={0} />
-        <StatCard label="Completed" value={stats.done || 0} icon="✓" delay={100} />
-        <StatCard label="Pending" value={stats.pending || 0} icon="⏳" delay={200} />
+        <StatCard label="Total Archives" value={stats.total || 0} icon={icons.archive} delay={0} />
+        <StatCard label="Completed" value={stats.done || 0} icon={icons.check} delay={100} />
+        <StatCard label="Pending" value={stats.pending || 0} icon={icons.clock} delay={200} />
         <div className="stat-card" style={{ animationDelay: '300ms' }}>
-          <div className="stat-card-icon">💾</div>
+          <div className="stat-card-icon">{icons.storage}</div>
           <div className="stat-card-body">
             <div className="stat-card-value">{formatBytes(stats.totalSizeBytes)}</div>
             <div className="stat-card-label">Storage Used</div>
@@ -221,7 +234,7 @@ export default function DashboardPage() {
             <BarChart data={domainData} layout="vertical" margin={{ left: 10 }}>
               <XAxis type="number" tick={{ fill: '#5c5c66', fontSize: 11 }} axisLine={false} tickLine={false} allowDecimals={false} />
               <YAxis type="category" dataKey="domain" tick={{ fill: '#8e8e96', fontSize: 11 }} axisLine={false} tickLine={false} width={130} />
-              <Tooltip content={<CustomTooltip />} />
+              <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(255,255,255,0.04)', radius: 6 }} />
               <Bar dataKey="count" fill="#52525b" radius={[0, 4, 4, 0]} name="Archives" barSize={20} />
             </BarChart>
           </ResponsiveContainer>
@@ -229,7 +242,6 @@ export default function DashboardPage() {
       )}
 
       {/* Tag cloud */}
-      <TagCloud onTagClick={(tag) => navigate(`/browse?tag=${tag}`)} />
     </div>
   );
 }

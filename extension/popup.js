@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     archiveBtn.disabled = true;
-    archiveBtn.textContent = '⏳ Archiving…';
+    archiveBtn.textContent = 'Archiving...';
 
     const tags = tagsInput.value
       .split(',')
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       { action: 'archive', url: currentUrl, tags },
       (response) => {
         archiveBtn.disabled = false;
-        archiveBtn.textContent = '📥 Archive This Page';
+        archiveBtn.textContent = 'Archive This Page';
 
         if (response?.success) {
           if (response.data?.duplicate) {
