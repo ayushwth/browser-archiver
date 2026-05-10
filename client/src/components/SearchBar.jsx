@@ -33,7 +33,7 @@ export default function SearchBar({ value, onChange, placeholder, autoFocus }) {
         onChange={(e) => onChange(e.target.value)}
         id="search-input"
       />
-      <span className="search-bar-icon">🔍</span>
+      <span className="search-bar-icon">�</span>
       <span className="search-bar-shortcut">/</span>
     </div>
   );

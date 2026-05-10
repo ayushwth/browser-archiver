@@ -61,7 +61,7 @@ export default function SearchPage() {
           {/* Error */}
           {error && (
             <div className="card" style={{ borderLeftColor: 'var(--color-error)', borderLeftWidth: '3px' }}>
-              <p style={{ color: 'var(--color-error)' }}>⚠️ {error}</p>
+              <p style={{ color: 'var(--color-error)' }}>{error}</p>
             </div>
           )}
 
@@ -84,7 +84,7 @@ export default function SearchPage() {
           {/* Empty state */}
           {!loading && results.length === 0 && query.trim() && (
             <div className="empty-state">
-              <div className="empty-icon">🔎</div>
+              <div className="empty-icon">○</div>
               <h3>No results found</h3>
               <p>
                 Try different keywords or check if the page has been archived
@@ -130,7 +130,7 @@ export default function SearchPage() {
       {/* Hint when no query */}
       {!query.trim() && !loading && (
         <div className="empty-state">
-          <div className="empty-icon">💡</div>
+          <div className="empty-icon">✨</div>
           <h3>Start typing to search</h3>
           <p>
             Press <kbd style={{ 

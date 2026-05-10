@@ -82,7 +82,7 @@ export default function BrowsePage() {
           disabled={submitting || !url.trim()}
           id="archive-submit-btn"
         >
-          {submitting ? '⏳ Archiving…' : '📥 Archive'}
+          {submitting ? 'Archiving…' : 'Archive'}
         </button>
       </form>
 
@@ -97,9 +97,6 @@ export default function BrowsePage() {
             right: 'auto',
           }}
         >
-          {submitMessage.type === 'success' && '✅ '}
-          {submitMessage.type === 'error' && '❌ '}
-          {submitMessage.type === 'info' && 'ℹ️ '}
           {submitMessage.text}
         </div>
       )}
@@ -107,7 +104,7 @@ export default function BrowsePage() {
       {/* Error */}
       {error && (
         <div className="card" style={{ borderLeftColor: 'var(--color-error)', borderLeftWidth: '3px', marginBottom: 'var(--space-6)' }}>
-          <p style={{ color: 'var(--color-error)' }}>⚠️ {error}</p>
+          <p style={{ color: 'var(--color-error)' }}>{error}</p>
           <button className="btn btn-ghost btn-sm" onClick={refresh} style={{ marginTop: 'var(--space-3)' }}>
             Retry
           </button>
@@ -137,7 +134,7 @@ export default function BrowsePage() {
       {/* Empty state */}
       {!loading && archives.length === 0 && !error && (
         <div className="empty-state">
-          <div className="empty-icon">📭</div>
+          <div className="empty-icon">∴</div>
           <h3>No pages archived yet</h3>
           <p>
             Paste a URL above to archive your first webpage, or install the
