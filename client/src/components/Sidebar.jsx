@@ -32,6 +32,13 @@ export default function Sidebar() {
           className={({ isActive }) => (isActive ? 'active' : '')}
           end
         >
+          <span className="nav-icon">◉</span>
+          Dashboard
+        </NavLink>
+        <NavLink
+          to="/search"
+          className={({ isActive }) => (isActive ? 'active' : '')}
+        >
           <span className="nav-icon">⌕</span>
           Search
         </NavLink>
@@ -41,6 +48,13 @@ export default function Sidebar() {
         >
           <span className="nav-icon">≡</span>
           Browse
+        </NavLink>
+        <NavLink
+          to="/timeline"
+          className={({ isActive }) => (isActive ? 'active' : '')}
+        >
+          <span className="nav-icon">⏤</span>
+          Timeline
         </NavLink>
       </nav>
 

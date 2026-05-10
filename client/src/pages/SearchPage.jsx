@@ -2,6 +2,20 @@ import { useSearch } from '../hooks/useSearch.js';
 import SearchBar from '../components/SearchBar.jsx';
 import ResultCard from '../components/ResultCard.jsx';
 
+function SkeletonCard() {
+  return (
+    <div className="card result-card skeleton-card">
+      <div className="skeleton-circle" />
+      <div className="skeleton-body">
+        <div className="skeleton-line skeleton-line-title" />
+        <div className="skeleton-line skeleton-line-url" />
+        <div className="skeleton-line skeleton-line-text" />
+        <div className="skeleton-line skeleton-line-text short" />
+      </div>
+    </div>
+  );
+}
+
 export default function SearchPage() {
   const {
     query,
@@ -65,25 +79,33 @@ export default function SearchPage() {
             </div>
           )}
 
-          {/* Loading */}
+          {/* Loading skeletons */}
           {loading && (
-            <div className="loading-spinner">
-              <div className="spinner"></div>
+            <div className="results-list">
+              <SkeletonCard />
+              <SkeletonCard />
+              <SkeletonCard />
             </div>
           )}
 
-          {/* Results list */}
+          {/* Results list with stagger animation */}
           {!loading && results.length > 0 && (
-            <div className="results-list">
-              {results.map((result) => (
-                <ResultCard key={result.id} result={result} />
+            <div className="results-list results-animated">
+              {results.map((result, i) => (
+                <div
+                  key={result.id}
+                  className="result-animate-in"
+                  style={{ animationDelay: `${i * 60}ms` }}
+                >
+                  <ResultCard result={result} />
+                </div>
               ))}
             </div>
           )}
 
           {/* Empty state */}
           {!loading && results.length === 0 && query.trim() && (
-            <div className="empty-state">
+            <div className="empty-state empty-float">
               <div className="empty-icon">—</div>
               <h3>No results found</h3>
               <p>
@@ -129,7 +151,7 @@ export default function SearchPage() {
 
       {/* Hint when no query */}
       {!query.trim() && !loading && (
-        <div className="empty-state">
+        <div className="empty-state empty-float">
           <div className="empty-icon">◈</div>
           <h3>Start typing to search</h3>
           <p>

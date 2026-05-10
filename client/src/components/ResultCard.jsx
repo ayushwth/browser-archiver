@@ -1,11 +1,24 @@
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TagChip from './TagChip.jsx';
 
-export default function ResultCard({ result, onDelete }) {
+export default function ResultCard({ result, onDelete, compact }) {
   const navigate = useNavigate();
+  const [showPreview, setShowPreview] = useState(false);
+  const hoverTimeout = useRef(null);
+  const previewRef = useRef(null);
 
   const handleClick = () => {
     navigate(`/view/${result.id}`);
+  };
+
+  const handleMouseEnter = () => {
+    hoverTimeout.current = setTimeout(() => setShowPreview(true), 500);
+  };
+
+  const handleMouseLeave = () => {
+    clearTimeout(hoverTimeout.current);
+    setShowPreview(false);
   };
 
   const formatDate = (dateStr) => {
@@ -26,12 +39,19 @@ export default function ResultCard({ result, onDelete }) {
   const sanitizeSnippet = (html) => {
     if (!html) return '';
     return html
-      .replace(/<(?!\/?(mark)(?=>|\s))\/?[^>]+>/gi, '')
+      .replace(/<(?!\/?(?:mark)(?=>|\s))\/?[^>]+>/gi, '')
       .substring(0, 400);
   };
 
   return (
-    <div className="card result-card" onClick={handleClick} id={`result-${result.id}`}>
+    <div
+      className={`card result-card ${compact ? 'result-card-compact' : ''}`}
+      onClick={handleClick}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      id={`result-${result.id}`}
+      style={{ position: 'relative' }}
+    >
       <div className="card-favicon">
         {faviconUrl ? (
           <img
@@ -55,7 +75,7 @@ export default function ResultCard({ result, onDelete }) {
         <div className="card-title">{result.title || 'Untitled Page'}</div>
         <div className="card-url">{result.url}</div>
 
-        {result.snippets?.length > 0 && (
+        {!compact && result.snippets?.length > 0 && (
           <div
             className="card-snippet"
             dangerouslySetInnerHTML={{
@@ -69,7 +89,7 @@ export default function ResultCard({ result, onDelete }) {
 
           {result.status && (
             <span className={`status-badge ${result.status}`}>
-              <span className="status-dot"></span>
+              <span className="status-dot" />
               {result.status}
             </span>
           )}
@@ -98,10 +118,36 @@ export default function ResultCard({ result, onDelete }) {
             onClick={() => onDelete(result.id)}
             title="Delete"
           >
-            Delete
+            🗑
           </button>
         )}
       </div>
+
+      {/* Hover preview popup */}
+      {showPreview && (
+        <div className="preview-popup" ref={previewRef}>
+          <div className="preview-popup-header">
+            {faviconUrl && <img src={faviconUrl} alt="" className="preview-favicon" />}
+            <div>
+              <div className="preview-title">{result.title || 'Untitled'}</div>
+              <div className="preview-domain">{result.domain}</div>
+            </div>
+          </div>
+          {result.textContent && (
+            <p className="preview-text">
+              {result.textContent.substring(0, 200)}
+              {result.textContent.length > 200 && '…'}
+            </p>
+          )}
+          <div className="preview-footer">
+            <span className={`status-badge ${result.status}`}>
+              <span className="status-dot" />
+              {result.status}
+            </span>
+            <span className="preview-date">{formatDate(result.createdAt)}</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
