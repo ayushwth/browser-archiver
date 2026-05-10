@@ -204,7 +204,3 @@ docker-compose down
 ```
 
 All data persists in Docker volumes and will be available when services restart.
-
-## License
-
-MIT License - See LICENSE file for details
