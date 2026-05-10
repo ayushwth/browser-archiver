@@ -1,5 +1,4 @@
 # Browsing Archive
-
 A self-hosted, full-stack web application for archiving, preserving, and searching web content. Capture any webpage as a permanent PDF snapshot, index its full text, and retrieve it instantly through a modern dashboard.
 
 ---
@@ -345,7 +344,7 @@ browsing-archive/
 ### Search returning no results
 
 1. Confirm Meilisearch is healthy: `curl http://localhost:7700/health`
-2. The application falls back to PostgreSQL ILIKE search automatically if Meilisearch is unavailable
+2. The applicatisearch automatically if Meilisearch is unavailable
 3. Restart all services: `docker-compose restart`
 
 ---
@@ -363,3 +362,13 @@ All data is persisted in Docker volumes and will be available on the next startu
 ## License
 
 This project is provided as-is for personal use. See the LICENSE file for details.
+rver logs
+- Restart all services: `docker-compose restart`
+
+## Stopping Services
+
+```bash
+docker-compose down
+```
+
+All data persists in Docker volumes and will be available when services restart.
