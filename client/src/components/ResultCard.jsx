@@ -47,7 +47,7 @@ export default function ResultCard({ result, onDelete }) {
           className="fallback-icon"
           style={{ display: faviconUrl ? 'none' : 'block' }}
         >
-          ◉
+          ⬤
         </span>
       </div>
 

@@ -21,7 +21,7 @@ export default function Sidebar() {
   return (
     <aside className="sidebar">
       <div className="sidebar-logo">
-        <div className="logo-icon">A</div>
+        <div className="logo-icon">→</div>
         <h1>Archive</h1>
       </div>
 
@@ -32,14 +32,14 @@ export default function Sidebar() {
           className={({ isActive }) => (isActive ? 'active' : '')}
           end
         >
-          <span className="nav-icon">◈</span>
+          <span className="nav-icon">⌕</span>
           Search
         </NavLink>
         <NavLink
           to="/browse"
           className={({ isActive }) => (isActive ? 'active' : '')}
         >
-          <span className="nav-icon">≣</span>
+          <span className="nav-icon">≡</span>
           Browse
         </NavLink>
       </nav>

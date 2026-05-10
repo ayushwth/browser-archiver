@@ -88,7 +88,7 @@ export default function ViewerPage() {
   if (error) {
     return (
       <div className="empty-state">
-        <div className="empty-icon">⚠</div>
+        <div className="empty-icon">!</div>
         <h3>Could not load archive</h3>
         <p>{error}</p>
         <button

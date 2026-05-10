@@ -4,37 +4,37 @@
    Design System — CSS Custom Properties
    ======================================== */
 :root {
-  /* Color palette — minimal dark mode */
-  --color-bg-primary: #ffffff;
-  --color-bg-secondary: #f8f9fa;
-  --color-bg-tertiary: #f0f2f5;
-  --color-bg-card: #ffffff;
-  --color-bg-glass: rgba(255, 255, 255, 0.95);
-  --color-bg-input: #f8f9fa;
-  --color-bg-hover: #f0f2f5;
+  /* Color palette — clean dark mode */
+  --color-bg-primary: #0f1117;
+  --color-bg-secondary: #161b22;
+  --color-bg-tertiary: #21262d;
+  --color-bg-card: #161b22;
+  --color-bg-glass: rgba(22, 27, 34, 0.95);
+  --color-bg-input: #0d1117;
+  --color-bg-hover: #21262d;
 
-  --color-border: #e5e7eb;
-  --color-border-hover: #d1d5db;
-  --color-border-focus: #9ca3af;
+  --color-border: #30363d;
+  --color-border-hover: #444c56;
+  --color-border-focus: #58a6ff;
 
-  --color-text-primary: #1f2937;
-  --color-text-secondary: #6b7280;
-  --color-text-tertiary: #9ca3af;
-  --color-text-muted: #d1d5db;
+  --color-text-primary: #e6edf3;
+  --color-text-secondary: #8b949e;
+  --color-text-tertiary: #6e7681;
+  --color-text-muted: #484f58;
 
-  --color-accent: #3b82f6;
-  --color-accent-hover: #2563eb;
-  --color-accent-light: rgba(59, 130, 246, 0.1);
+  --color-accent: #58a6ff;
+  --color-accent-hover: #79c0ff;
+  --color-accent-light: rgba(88, 166, 255, 0.1);
 
-  --color-success: #10b981;
-  --color-warning: #f59e0b;
-  --color-error: #ef4444;
-  --color-info: #3b82f6;
+  --color-success: #3fb950;
+  --color-warning: #d29922;
+  --color-error: #f85149;
+  --color-info: #58a6ff;
 
   /* Gradients */
-  --gradient-accent: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-  --gradient-card: linear-gradient(145deg, #ffffff 0%, #fafbfc 100%);
-  --gradient-hero: linear-gradient(180deg, #ffffff 0%, #f8f9fa 40%, #ffffff 100%);
+  --gradient-accent: linear-gradient(135deg, #58a6ff 0%, #79c0ff 100%);
+  --gradient-card: linear-gradient(145deg, #161b22 0%, #0d1117 100%);
+  --gradient-hero: linear-gradient(180deg, #0f1117 0%, #161b22 40%, #0f1117 100%);
   --gradient-glow: none;
 
   /* Typography */
@@ -221,6 +221,7 @@ img {
   font-size: var(--font-size-lg);
   box-shadow: none;
   color: white;
+  font-weight: bold;
 }
 
 .sidebar-logo h1 {
