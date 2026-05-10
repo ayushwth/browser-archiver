@@ -1,18 +1,19 @@
 # Browsing Archive
-A self-hosted, full-stack web application for archiving, preserving, and searching web content. Capture any webpage as a permanent PDF snapshot, index its full text, and retrieve it instantly through a modern dashboard.
+
+> **Self-hosted web archiving that actually works.** Capture any webpage as a PDF, search across thousands of archives in milliseconds, and never lose important content again.
+
+A full-stack, production-ready application for archiving, preserving, and searching web content. One-click browser extension archiving, powerful full-text search, and a beautiful analytics dashboard—all self-hosted.
 
 ---
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Architecture](#architecture)
-- [Key Features](#key-features)
-- [Technology Stack](#technology-stack)
-- [Prerequisites](#prerequisites)
+- [Features](#features)
 - [Quick Start](#quick-start)
+- [Architecture](#architecture)
+- [Technology Stack](#technology-stack)
 - [Usage Guide](#usage-guide)
-- [Development](#development)
+- [Development Guide](#development-guide)
 - [Project Structure](#project-structure)
 - [API Reference](#api-reference)
 - [Troubleshooting](#troubleshooting)
@@ -344,7 +345,7 @@ browsing-archive/
 ### Search returning no results
 
 1. Confirm Meilisearch is healthy: `curl http://localhost:7700/health`
-2. The applicatisearch automatically if Meilisearch is unavailable
+2. The application falls back to PostgreSQL ILIKE search automatically if Meilisearch is unavailable
 3. Restart all services: `docker-compose restart`
 
 ---
@@ -361,14 +362,4 @@ All data is persisted in Docker volumes and will be available on the next startu
 
 ## License
 
-This project is provided as-is for personal use. See the LICENSE file for details.
-rver logs
-- Restart all services: `docker-compose restart`
-
-## Stopping Services
-
-```bash
-docker-compose down
-```
-
-All data persists in Docker volumes and will be available when services restart.
+This project is provided as-is for personal use.
