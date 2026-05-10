@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: archive-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: archive_user
+      POSTGRES_PASSWORD: archive_pass
+      POSTGRES_DB: browsing_archive
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: archive-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+
+  meilisearch:
+    image: getmeili/meilisearch:v1.7
+    container_name: archive-meilisearch
+    restart: unless-stopped
+    environment:
+      MEILI_MASTER_KEY: masterKey123
+      MEILI_ENV: development
+    ports:
+      - "7700:7700"
+    volumes:
+      - meilidata:/meili_data
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: archive-server
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      DATABASE_URL: "postgresql://archive_user:archive_pass@postgres:5432/browsing_archive?schema=public"
+      REDIS_URL: "redis://redis:6379"
+      MEILI_HOST: "http://meilisearch:7700"
+      MEILI_MASTER_KEY: "masterKey123"
+      PORT: 3001
+      NODE_ENV: development
+      PUPPETEER_EXECUTABLE_PATH: "/usr/bin/chromium-browser"
+      PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
+    depends_on:
+      - postgres
+      - redis
+      - meilisearch
+    volumes:
+      - ./server/src:/app/src
+      - ./server/storage:/app/storage
+
+volumes:
+  pgdata:
+  redisdata:
+  meilidata:

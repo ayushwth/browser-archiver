@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Archive {
+  id          String   @id @default(uuid())
+  url         String
+  urlHash     String   @unique
+  title       String?
+  domain      String
+  pdfPath     String
+  textContent String?  @db.Text
+  pageSize    Int?
+  ocrUsed     Boolean  @default(false)
+  status      String   @default("pending")
+  errorMsg    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  tags        Tag[]    @relation("ArchiveTags")
+}
+
+model Tag {
+  id       String    @id @default(uuid())
+  name     String    @unique
+  color    String?
+  archives Archive[] @relation("ArchiveTags")
+}

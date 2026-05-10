@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Browsing Archive",
+  "description": "Capture and archive webpages to your personal Browsing Archive",
+  "version": "1.0.0",
+  "permissions": ["activeTab", "storage", "tabs"],
+  "host_permissions": ["http://localhost:3001/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

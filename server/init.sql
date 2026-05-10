@@ -1,0 +1,27 @@
+CREATE TABLE IF NOT EXISTS "Archive" (
+  id TEXT PRIMARY KEY,
+  url TEXT NOT NULL,
+  "urlHash" TEXT NOT NULL UNIQUE,
+  title TEXT,
+  domain TEXT NOT NULL,
+  "pdfPath" TEXT NOT NULL,
+  "textContent" TEXT,
+  "pageSize" INTEGER,
+  "ocrUsed" BOOLEAN DEFAULT false,
+  status TEXT DEFAULT 'pending',
+  "errorMsg" TEXT,
+  "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  "updatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS "Tag" (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL UNIQUE,
+  color TEXT
+);
+
+CREATE TABLE IF NOT EXISTS "_ArchiveTags" (
+  "A" TEXT NOT NULL REFERENCES "Archive"(id) ON DELETE CASCADE,
+  "B" TEXT NOT NULL REFERENCES "Tag"(id) ON DELETE CASCADE,
+  PRIMARY KEY ("A", "B")
+);

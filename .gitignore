@@ -1,0 +1,6 @@
+node_modules/
+.env
+server/storage/pdfs/
+dist/
+.DS_Store
+*.log

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', -apple-system, sans-serif;
+      background: #0a0e1a;
+      color: #f1f5f9;
+      width: 340px;
+      padding: 16px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .header .logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #638fff, #a78bfa);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .header h1 {
+      font-size: 15px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #638fff, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .current-page {
+      background: rgba(26, 34, 54, 0.7);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .current-page .label {
+      font-size: 11px;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    .current-page .url {
+      font-size: 13px;
+      color: #94a3b8;
+      word-break: break-all;
+      line-height: 1.4;
+    }
+
+    .tag-input {
+      width: 100%;
+      padding: 8px 12px;
+      font-size: 13px;
+      background: rgba(17, 24, 39, 0.8);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 6px;
+      color: #f1f5f9;
+      outline: none;
+      margin-bottom: 12px;
+      font-family: inherit;
+    }
+
+    .tag-input:focus {
+      border-color: rgba(99, 143, 255, 0.5);
+    }
+
+    .tag-input::placeholder { color: #475569; }
+
+    .btn {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: inherit;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #638fff, #a78bfa);
+      color: white;
+      box-shadow: 0 2px 12px rgba(99, 143, 255, 0.3);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 4px 20px rgba(99, 143, 255, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .message {
+      margin-top: 10px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .message.success {
+      background: rgba(52, 211, 153, 0.1);
+      color: #34d399;
+      border: 1px solid rgba(52, 211, 153, 0.2);
+    }
+
+    .message.error {
+      background: rgba(248, 113, 113, 0.1);
+      color: #f87171;
+      border: 1px solid rgba(248, 113, 113, 0.2);
+    }
+
+    .message.info {
+      background: rgba(96, 165, 250, 0.1);
+      color: #60a5fa;
+      border: 1px solid rgba(96, 165, 250, 0.2);
+    }
+
+    .settings {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .toggle-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: #94a3b8;
+    }
+
+    .toggle {
+      position: relative;
+      width: 36px;
+      height: 20px;
+    }
+
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background: #1a2236;
+      border-radius: 20px;
+      transition: 0.25s;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      left: 2px;
+      bottom: 2px;
+      background: #64748b;
+      border-radius: 50%;
+      transition: 0.25s;
+    }
+
+    .toggle input:checked + .toggle-slider {
+      background: rgba(99, 143, 255, 0.2);
+      border-color: rgba(99, 143, 255, 0.3);
+    }
+
+    .toggle input:checked + .toggle-slider::before {
+      transform: translateX(16px);
+      background: #638fff;
+    }
+
+    .footer {
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    .footer a {
+      font-size: 12px;
+      color: #638fff;
+      text-decoration: none;
+    }
+
+    .footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">📚</div>
+    <h1>Browsing Archive</h1>
+  </div>
+
+  <div class="current-page">
+    <div class="label">Current Page</div>
+    <div class="url" id="current-url">Loading…</div>
+  </div>
+
+  <input
+    type="text"
+    class="tag-input"
+    id="tags-input"
+    placeholder="Tags (comma-separated, optional)"
+  />
+
+  <button class="btn btn-primary" id="archive-btn">📥 Archive This Page</button>
+
+  <div id="message" style="display: none;"></div>
+
+  <div class="settings">
+    <div class="toggle-row">
+      <span>Auto-capture pages</span>
+      <label class="toggle">
+        <input type="checkbox" id="auto-capture-toggle" />
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a href="http://localhost:5173" target="_blank">Open Archive Dashboard →</a>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
